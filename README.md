@@ -99,7 +99,7 @@ $$
 Therefore, 
 
 $$
-\begin{aligned} \frac{\partial L}{\partial W^{(l)}}=\left(A^{(l)}\right)^{\top} \delta^{(l)} \end{aligned} \quad [2]
+\begin{aligned} \frac{\partial L}{\partial W^{(l)}}=\left(A^{(l)}\right)^{\top} \delta^{(l+1)} \end{aligned} \quad [2]
 $$
 
 The error on the $(l+1)$ th layer is propagated from the $(l+2)$ th layer through the term $\frac{\partial L}{\partial A^{(l+1)}}$:
