@@ -8,7 +8,7 @@ A typical MLP is structured as follows:
 MLP consists of: 1. layers(an input layer, hidden layers, and an output layer) 2. activation neurons 3. bias units 4. weights. We can observe that activation neurons of two neighbor layers are connected by weights, and biases of the current layer are broadcasted to the activation neurons on the next layer. 
 
 Definitions:
-- $A^{(0)}$ is the activation matrix with number of neurons equal to the number of input features on the input layer
+- $A^{(0)}$ is the activation matrix with number of neurons equal to the number of input features for each sample on the input layer
 - $A^{(L)}$ is the activation matrix with number of neurons equal to the number of output features on the output layer
 - $A^{(l)}$ is the activation matrix with $P$ neurons for each sample on the $l$ th hidden layer
 - $A^{(l+1)}$ is the activation matrix with $Q$ neurons for each sample on the $(l+1)$ th hidden layer
