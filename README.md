@@ -54,12 +54,12 @@ $$
 a_{21} & a_{22} & \ldots & a_{2 P} \\
 \vdots & \vdots & \ddots & \vdots \\
 a_{m 1} & a_{m 2} & \ldots & a_{m P}
-\end{array}\right]^{(l)}} \end{aligned}, \quad
+\end{array}\right]^{(l)}} \end{aligned} \quad
 \begin{aligned}W^{(l)}=\underset{P \times Q}{\left[\begin{array}
 {cccc}w_{11} & w_{12} & \cdots & w_{1Q} \\
 w_{21} & w_{22} & \ldots & w_{2Q} \\
 \vdots & \vdots & \ddots & \vdots \\
-w_{P1} & w_{P2} & \ldots & w_{PQ}\end{array}\right]^{(l)}} \end{aligned}, \quad
+w_{P1} & w_{P2} & \ldots & w_{PQ}\end{array}\right]^{(l)}} \end{aligned} \quad
 \begin{aligned} Z^{(l)}=\underset{m \times Q}{\left[\begin{array}
 {cccc} z_{11} & z_{12} & \cdots & z_{1 Q} \\
 z_{21} & z_{22} & \ldots & z_{2 Q} \\
