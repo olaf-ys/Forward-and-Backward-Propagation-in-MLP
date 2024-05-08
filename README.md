@@ -70,7 +70,7 @@ $$
 ## Back Propagation
 Back progagation updates two kinds of network parameters (i.e. weights and bias units) using gradient descent. However, gradients for weights and biases are calculated differently
 
-For calculate of Back Propagation, we here introduce some extra definitions:
+For Back Propagation, we here introduce some extra definitions:
 - $A^{(l+2)}$ is the activation matrix with $J$ neurons for each sample on the $(l+2)$ th hidden layer
 - $L$ is the loss function
 - $\delta^{(l)}$ is the error back-propagates from the $(l+1)$ th layer to the $l$ th layer
@@ -120,7 +120,7 @@ $$
 {\delta^{(L-1)}}=\frac{\partial L}{\partial A^{(L)}} \odot \phi^{\prime}\left(Z^{(L-1)}\right) \quad [4]
 $$
 
-Now, by back-propagating the error term with [1], [2], [3], and [4], we are able to derive the gradient $\frac{\partial L}{\partial W^{(l)}}$
+Now, by back-propagating the error term with [2], [3], and [4], we are able to derive the gradient $\frac{\partial L}{\partial W^{(l)}}$
 
 ### Gradient of the biases
 
