@@ -9,7 +9,7 @@ MLP consists of: 1. layers(an input layer, hidden layers, and an output layer) 2
 
 Definitions:
 - $A^{(0)}$ is the activation matrix with number of neurons equal to the number of input features for each sample on the input layer
-- $A^{(L)}$ is the activation matrix with number of neurons equal to the number of output features on the output layer
+- $A^{(L)}$ is the activation matrix with number of neurons equal to the number of output features for each sample on the output layer
 - $A^{(l)}$ is the activation matrix with $P$ neurons for each sample on the $l$ th hidden layer
 - $A^{(l+1)}$ is the activation matrix with $Q$ neurons for each sample on the $(l+1)$ th hidden layer
 - $W^{(l)}$ is the weight matrix connecting the activation neurons on the lth hidden layer to the activation neurons $(l+1)$ th hidden layer
