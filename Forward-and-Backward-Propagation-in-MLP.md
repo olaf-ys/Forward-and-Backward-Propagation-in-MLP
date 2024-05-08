@@ -69,11 +69,73 @@ $$
 Back progagation updates two kinds of network parameters (i.e. weights and bias units) using gradient descent. However, gradients for weights and biases are calculated differently
 
 For calculate of Back Propagation, we here introduce some extra definitions:
-$A^{(l+2)}$ is the activation matrix with $J$ neurons for each sample on the $(l+2)$ th hidden layer
-$L$ is the loss function
-$\delta^{(l)}$ is the error back-propagates from the $(l+1)$ th layer to the $l$ th layer
+- $A^{(l+2)}$ is the activation matrix with $J$ neurons for each sample on the $(l+2)$ th hidden layer
+- $L$ is the loss function
+- $\delta^{(l)}$ is the error back-propagates from the $(l+1)$ th layer to the $l$ th layer
 
 The calculation follows the chain rule:
 
+<img src="images/The_Chain_Rule.png" width="186.5" height="424.5" alt="示例图片">
 
-- Gradient of weights
+### Gradient of the weights
+
+$$
+\begin{aligned}
+\frac{\partial L}{\partial W^{(l)}} &= \frac{\partial L}{\partial A^{(l+1)}} \frac{\partial A^{(l+1)}}{\partial \phi(Z^{(l)})} \frac{\phi(Z^{(l)})}{\partial Z^{(l)}} \frac{\partial Z^{(l)}}{\partial W^{(l)}} \\
+&= \frac{\partial L}{\partial A^{(l+1)}} \frac{\phi(Z^{(l)})}{\partial Z^{(l)}} \frac{\partial Z^{(l)}}{\partial W^{(l)}} \\
+&= \frac{\partial L}{\partial A^{(l+1)}} \phi^{\prime} (Z^{(l)}) A^{(l)} \\
+&= \underset{P \times m}{(A^{(l)})^{\top}} \Big(\underset{m \times Q}{\frac{\partial L}{\partial A^{(l+1)}}} \odot \underset{m \times Q} {\phi^{\prime} (Z^{(l)})} \Big)
+\end{aligned}
+$$
+
+Define the error terms as:
+
+$$
+\begin{aligned} {\delta^{(l)}}=\frac{\partial L}{\partial A^{(l+1)}} \odot \phi^{\prime}\left(Z^{(l)}\right) \end{aligned} \quad [1]
+$$
+
+Therefore, 
+
+$$
+\begin{aligned} \frac{\partial L}{\partial W^{(l)}}=\left(A^{(l)}\right)^{\top} \delta^{(l)} \end{aligned} \quad [2]
+$$
+
+The error on the lth layer is propagated from the $(l+1)$ th layer through the term $\frac{\partial L}{\partial A^{(l+1)}}$:
+
+$$
+\begin{aligned} \frac{\partial L}{\partial A^{(l+1)}}=\frac{\partial L}{\partial A^{(l+2)}} \frac{\partial A^{(l+2)}}{\partial Z^{(l+1)}} \frac{\partial Z^{(l+1)}}{\partial A^{(l+1)}}=\underset{m \times J}{\frac{\partial L}{\partial A^{(l+2)}}} \odot \underset{m \times J} {\phi^{\prime} \left(Z^{(l+1)}\right)} \underset{J \times Q}{\left(W^{(l+1)}\right)^{\top}} = \delta^{(l+1)}\left(W^{(l+1)}\right)^{\top} \end{aligned}
+$$
+
+so that 
+
+$$
+\begin{aligned} \delta^{(l)}=\left[\delta^{(l+1)} \left(W^{(l+1)}\right)^{\top}\right] \odot \phi^{\prime}\left(Z^{(l)}\right) \end{aligned} \quad [3]
+$$
+
+Suppose $L$ is the output layer, by definition of the error term:
+
+$$
+{\delta^{(L-1)}}=\frac{\partial L}{\partial A^{(L)}} \odot \phi^{\prime}\left(Z^{(L-1)}\right) \quad [4]
+$$
+
+Now, by back-propagating the error term with [1], [2], [3], and [4], we are able to derive the gradient $\frac{\partial L}{\partial W^{(l)}}$
+
+### Gradient of the biases
+
+The calculation is similar to that of the gradient of the weights:
+
+$$
+\begin{aligned} \frac{\partial L}{\partial B^{(l)}}=\frac{\partial L}{\partial Z^{(l)}}\frac{\partial Z^{(l)}}{\partial B^{(l)}}=\delta^{(l)} \ \end{aligned}
+$$
+
+$\delta^{(l)}$ is an $m \times q$ matrix, where each row represents a sample and each column represents the error of a neuron. Since the bias term $B^{(l)}$ is shared across all samples, when calculating $\frac{\partial L}{\partial B^{(l)}}$, it is actually necessary to sum or average the errors of each neuron across all samples in the batch:
+
+$$
+\begin{aligned} \frac{\partial L}{\partial B^{(l)}}=\frac{1}{m} \sum_{i=1}^m \delta_i^{(l)} \end{aligned}
+$$
+
+In summary, averaging the bias gradient across samples is primarily for stability and generalization.
+
+
+
+
