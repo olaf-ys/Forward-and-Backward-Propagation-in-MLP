@@ -141,6 +141,8 @@ In summary, averaging the bias gradient across samples is primarily for stabilit
 ## Example
 Suppose $x_1 = 1, \ x_2 =2$, biases are initialized to 1, and weights are initialized to 0.5, activation = Sigmoid, loss = MSE, learning rate=1, target=0.4, and only 1 sample
 
+![示例图片](images/MLP_Example.png)
+
 **Forward Propagation**
 
 For the 1st layer:
