@@ -75,4 +75,5 @@ $\delta^{(l)}$ is the error back-propagates from the $(l+1)$ th layer to the $l$
 
 The calculation follows the chain rule:
 
+
 - Gradient of weights
