@@ -1,15 +1,16 @@
 # Forward-and-Backward-Propagation-in-MLP
 -- Yuanshan Zhang
 
-I here provide a well-explained forward and backward propagation in MLP
+I here provide a theoretical explanation for forward and backward propagation in MLP. Then, I will use theoretical formulas to calculate the gradients and compare them to the calculation using PyTorch
+
 ## MLP Structure
 A typical MLP is structured as follows:
 ![示例图片](images/MLP.png)
 MLP consists of: 1. layers(an input layer, hidden layers, and an output layer) 2. activation neurons 3. bias units 4. weights. We can observe that activation neurons of two neighbor layers are connected by weights, and biases of the current layer are broadcasted to the activation neurons on the next layer. 
 
 Definitions:
-- $A^{(0)}$ is the activation matrix with number of neurons equal to the number of input features for each sample on the input layer
-- $A^{(L)}$ is the activation matrix with number of neurons equal to the number of output features for each sample on the output layer
+- $A^{(0)}$ is the activation matrix with the number of neurons equal to the number of input features for each sample on the input layer
+- $A^{(L)}$ is the activation matrix with the number of neurons equal to the number of output features for each sample on the output layer
 - $A^{(l)}$ is the activation matrix with $P$ neurons for each sample on the $l$ th hidden layer
 - $A^{(l+1)}$ is the activation matrix with $Q$ neurons for each sample on the $(l+1)$ th hidden layer
 - $W^{(l)}$ is the weight matrix connecting the activation neurons on the lth hidden layer to the activation neurons $(l+1)$ th hidden layer
@@ -21,11 +22,11 @@ Definitions:
 - $q$ is the index for a neuron on the $(l+1)$ th layer
 
 ## Forward Propagation
-Forward propagtion updates the values of activation neurons.
+Forward propagation updates the values of activation neurons.
 
 For the $i$ th sample, activate neurons on the $l$ th hidden layer are: $A_i^{(l)}=\left[a_{i1} \ a_{i2} \ldots a_{iP} \right]$
 
-The weight vector connecting to the qth neuron on the $(l+1)$ th hidden layer from the lth hidden layer is:
+The weight vector connecting to the $q$ th neuron on the $(l+1)$ th hidden layer from the lth hidden layer is:
 
 
 $$
@@ -66,7 +67,7 @@ z_{m 1} & z_{m 2} & \ldots & z_{m Q}\end{array}\right]^{(l)}} \end{aligned}
 $$
 
 ## Back Propagation
-Back progagation updates two kinds of network parameters (i.e. weights and bias units) using gradient descent. However, gradients for weights and biases are calculated differently
+Back Propagation updates two kinds of network parameters (i.e. weights and bias units) using gradient descent. However, gradients for weights and biases are calculated differently
 
 For Back Propagation, we here introduce some extra definitions:
 - $A^{(l+2)}$ is the activation matrix with $J$ neurons for each sample on the $(l+2)$ th hidden layer
@@ -119,7 +120,7 @@ $$
 {\delta^{(L)}}=\frac{\partial L}{\partial A^{(L)}} \odot \phi^{\prime}\left(Z^{(L-1)}\right) \quad [4]
 $$
 
-Now, by back-propagating the error term with [2], [3], and [4], we are able to derive the gradient $\frac{\partial L}{\partial W^{(l)}}$
+Now, by back-propagating the error term with [2], [3], and [4], we can derive the gradient $\frac{\partial L}{\partial W^{(l)}}$
 
 ### Gradient of the biases
 
@@ -129,7 +130,7 @@ $$
 \begin{aligned} \frac{\partial L}{\partial B^{(l)}}=\frac{\partial L}{\partial Z^{(l)}}\frac{\partial Z^{(l)}}{\partial B^{(l)}}=\delta^{(l+1)} \ \end{aligned} \quad[5]
 $$
 
-$\delta^{(l+1)}$ is an $m \times q$ matrix, where each row represents a sample and each column represents the error of a neuron. Since the bias term $B^{(l)}$ is shared across all samples, when calculating $\frac{\partial L}{\partial B^{(l)}}$, it is actually necessary to sum or average the errors of each neuron across all samples in the batch:
+$\delta^{(l+1)}$ is an $m \times q$ matrix, where each row represents a sample and each column represents the error of a neuron. Since the bias term $B^{(l)}$ is shared across all samples when calculating $\frac{\partial L}{\partial B^{(l)}}$, it is necessary to sum or average the errors of each neuron across all samples in the batch:
 
 $$
 \begin{aligned} \frac{\partial L}{\partial B^{(l)}}=\frac{1}{m} \sum_{i=1}^m \delta_i^{(l)} \end{aligned}
@@ -178,13 +179,9 @@ For sigmoid, $\phi'(Z) = \phi(Z)(1-\phi(Z))$
 
 - From the 1st hidden layer to the input layer:
   - By [3],
-
-$$
-\begin{aligned}\delta^{(1)} &= [\delta^{(2)}(W^{(1)})^{\top}] \odot \phi'(Z^{(0)}) \\
-&=  [\delta^{(2)}(W^{(1)})^{\top}] \odot (A^{(1)}(1-A^{(1)})) \\         
-&=4.424112 \times 10^{-3}\end{aligned}
-$$
-
+    
+    - $\delta^{(1)} = [\delta^{(2)}(W^{(1)})^{\top}] \odot \phi'(Z^{(0)}) =  [\delta^{(2)}(W^{(1)})^{\top}] \odot (A^{(1)}(1-A^{(1)}))=4.424112 \times 10^{-3}$
+      
   - By [2],
 
 $$
@@ -202,5 +199,4 @@ $$
 
 $B^{(0)} \rightarrow 1-0.1\times4.424112\times10^{-3}=0.9996$
 
-The results are exactly the same as testified by PyTorch, see [my notebook](./Forward&Backward_Propagation_with_PyTorch.ipynb)
-
+The results are exactly the same as those given by PyTorch, see [Forward&Backward_Propagation_with_PyTorch.ipynb](./Forward&Backward_Propagation_with_PyTorch.ipynb)
