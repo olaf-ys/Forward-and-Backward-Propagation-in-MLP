@@ -5,7 +5,7 @@ I here provide a well-explained forward and backward propagation in MLP
 ## MLP Structure
 A typical MLP is structured as follows:
 ![示例图片](images/MLP.png)
-MLP basically consists of: 1. input layer 2. hidden layers 3. output layer 4. activation neurons 5. bias units. We can observe that activation neurons of two neighbor layers are connected by weights, and biases of the current layer are broadcasted to the activation neurons on the next layer. 
+MLP consists of: 1. layers(an input layer, hidden layers, and an output layer) 2. activation neurons 3. bias units 4. weights. We can observe that activation neurons of two neighbor layers are connected by weights, and biases of the current layer are broadcasted to the activation neurons on the next layer. 
 
 ## Forward Propagation
 Forward propagtion updates the values of activation neurons.
@@ -35,6 +35,44 @@ w_{P q}
 \end{array}\right]
 $$
 
-Net input function from the $l$ th layer to the $(l+1)$ th layer is:
-$\begin{aligned} z_{iq}^{(l)}=(b_i+a_{i 1} w_{1 q}+\cdots+a_{i P} w_{P q})^{(l)}=b_i^{(l)} +A_i^{(l)} W_{j=q}^{(l)} \end{aligned}$
+The net input function from the $l$ th layer to the $(l+1)$ th layer is: $z_{iq}^{(l)}=(b_i+a_{i 1} w_{1 q}+\cdots+a_{i P} w_{P q})^{(l)}=b_i^{(l)} +A_i^{(l)} W_{j=q}^{(l)}$
 
+- Rewrite in the form of matrix: $Z^{(l)}=\underset{Q \times 1}{B^{(l)}}+ \underset{m \times Q}{A^{(l)}W^{(l)}}$, $B^{(l)}$ is broadcasted to $A^{(l)}W^{(l)}$
+
+The $q$ th activate neuron on the $(l+1)$ th hidden layer is: $a_{i q}^{(l+1)}=\phi(z_{iq}^{(l)})$. 
+- Rewrite in the form of matrix: $A^{(l+1)} = \phi(Z^{(l)})$
+
+Matrix Expressions:
+
+
+
+$$
+\begin{aligned} A^{(l)}=\underset{m \times P}{\left[\begin{array}
+{cccc}a_{11} & a_{12} & \cdots & a_{1 P} \\ 
+a_{21} & a_{22} & \ldots & a_{2 P} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m 1} & a_{m 2} & \ldots & a_{m P}
+\end{array}\right]^{(l)}} \end{aligned}, \quad
+\begin{aligned}W^{(l)}=\underset{P \times Q}{\left[\begin{array}
+{cccc}w_{11} & w_{12} & \cdots & w_{1Q} \\
+w_{21} & w_{22} & \ldots & w_{2Q} \\
+\vdots & \vdots & \ddots & \vdots \\
+w_{P1} & w_{P2} & \ldots & w_{PQ}\end{array}\right]^{(l)}} \end{aligned}, \quad
+\begin{aligned} Z^{(l)}=\underset{m \times Q}{\left[\begin{array}
+{cccc} z_{11} & z_{12} & \cdots & z_{1 Q} \\
+z_{21} & z_{22} & \ldots & z_{2 Q} \\
+\vdots & \vdots & \ddots & \vdots \\
+z_{m 1} & z_{m 2} & \ldots & z_{m Q}\end{array}\right]^{(l)}} \end{aligned}
+$$
+
+## Back Propagation
+Back progagation updates two kinds of network parameters (i.e. weights and bias units) using gradient descent. However, gradients for weights and biases are calculated differently
+
+For calculate of Back Propagation, we here introduce some extra definitions:
+$A^{(l+2)}$ is the activation matrix with $J$ neurons for each sample on the $(l+2)$ th hidden layer
+$L$ is the loss function
+$\delta^{(l)}$ is the error back-propagates from the $(l+1)$ th layer to the $l$ th layer
+
+The calculation follows the chain rule:
+
+- Gradient of weights
