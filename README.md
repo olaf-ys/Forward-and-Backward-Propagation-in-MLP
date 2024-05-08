@@ -7,10 +7,9 @@ A typical MLP is structured as follows:
 ![示例图片](images/MLP.png)
 MLP consists of: 1. layers(an input layer, hidden layers, and an output layer) 2. activation neurons 3. bias units 4. weights. We can observe that activation neurons of two neighbor layers are connected by weights, and biases of the current layer are broadcasted to the activation neurons on the next layer. 
 
-## Forward Propagation
-Forward propagtion updates the values of activation neurons.
-
-During the forward propagation of neurons on the $l$ th hidden layer to the $(l+1)$ th hidden layer, define the followings:
+Definitions:
+- $A^{(0)}$ is the activation matrix with number of neurons equal to the number of input features on the input layer
+- $A^{(L)}$ is the activation matrix with number of neurons equal to the number of output features on the output layer
 - $A^{(l)}$ is the activation matrix with $P$ neurons for each sample on the $l$ th hidden layer
 - $A^{(l+1)}$ is the activation matrix with $Q$ neurons for each sample on the $(l+1)$ th hidden layer
 - $W^{(l)}$ is the weight matrix connecting the activation neurons on the lth hidden layer to the activation neurons $(l+1)$ th hidden layer
@@ -20,6 +19,9 @@ During the forward propagation of neurons on the $l$ th hidden layer to the $(l+
 - $m$ is the batch size
 - $p$ is the index for a neuron on the $l$ th layer
 - $q$ is the index for a neuron on the $(l+1)$ th layer
+
+## Forward Propagation
+Forward propagtion updates the values of activation neurons.
 
 For the $i$ th sample, activate neurons on the $l$ th hidden layer are: $A_i^{(l)}=\left[a_{i1} \ a_{i2} \ldots a_{iP} \right]$
 
