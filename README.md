@@ -13,7 +13,7 @@ Definitions:
 - $A^{(L)}$ is the activation matrix with the number of neurons equal to the number of output features for each sample on the output layer
 - $A^{(l)}$ is the activation matrix with $P$ neurons for each sample on the $l$ th hidden layer
 - $A^{(l+1)}$ is the activation matrix with $Q$ neurons for each sample on the $(l+1)$ th hidden layer
-- $W^{(l)}$ is the weight matrix connecting the activation neurons on the lth hidden layer to the activation neurons $(l+1)$ th hidden layer
+- $W^{(l)}$ is the weight matrix connecting the activation neurons on the $l$ th hidden layer to the activation neurons $(l+1)$ th hidden layer
 - $B^{(l)}$ is the bias matrix on the $l$ th layer, and is initialized to 1
 - $\phi(Z^{(l)})$ is the activation function that calculates $A^{(l+1)}$
 - $Z^{(l)}$ is the net input function that combines $A^{(l)}$ and $W^{(l)}$
