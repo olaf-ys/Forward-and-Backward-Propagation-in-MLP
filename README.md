@@ -25,7 +25,7 @@ Forward propagtion updates the values of activation neurons.
 
 For the $i$ th sample, activate neurons on the $l$ th hidden layer are: $A_i^{(l)}=\left[a_{i1} \ a_{i2} \ldots a_{iP} \right]$
 
-The weight vector connecting to the qth neuron on the (l+1)th hidden layer from the lth hidden layer is:
+The weight vector connecting to the qth neuron on the $(l+1)$ th hidden layer from the lth hidden layer is:
 
 
 $$
@@ -201,3 +201,6 @@ W_{21}^{(0)} \end{array}\right] - 0.1 \frac{\partial L}{\partial W^{(0)}} = \lef
 $$
 
 $B^{(0)} \rightarrow 1-0.1\times4.424112\times10^{-3}=0.9996$
+
+The results are exactly the same as testified by PyTorch, see [my notebook](./Forward&Backward_Propagation_with_PyTorch.ipynb)
+
