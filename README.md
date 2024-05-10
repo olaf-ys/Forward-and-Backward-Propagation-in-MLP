@@ -38,7 +38,7 @@ w_{P q}
 \end{array}\right]
 $$
 
-The net input function from the $l$ th layer to the $(l+1)$ th layer is: $z_{iq}^{(l)}=(b_i+a_{i 1} w_{1 q}+\cdots+a_{i P} w_{P q})^{(l)}=b_i^{(l)} +A_i^{(l)} W_{j=q}^{(l)}$
+The net input function from the $l$ th layer to the $(l+1)$ th layer is: $z_{iq}^{(l)}=(b_q+a_{i 1} w_{1 q}+\cdots+a_{i P} w_{P q})^{(l)}=b_q^{(l)} +A_i^{(l)} W_{j=q}^{(l)}$
 
 - Rewrite in the form of matrix: $Z^{(l)}=\underset{Q \times 1}{B^{(l)}}+ \underset{m \times Q}{A^{(l)}W^{(l)}}$, $B^{(l)}$ is broadcasted to $A^{(l)}W^{(l)}$
 
