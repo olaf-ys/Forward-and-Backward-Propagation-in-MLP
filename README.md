@@ -6,7 +6,9 @@ I here provide a theoretical explanation for forward and backward propagation in
 ## MLP Structure
 A typical MLP is structured as follows:
 ![示例图片](images/MLP.png)
-MLP consists of: 1. layers(an input layer, hidden layers, and an output layer) 2. activation neurons 3. bias units 4. weights. We can observe that activation neurons of two neighbor layers are connected by weights, and biases of the current layer are broadcasted to the activation neurons on the next layer. 
+MLP consists of: 1. layers(an input layer, hidden layers, and an output layer) 2. activation neurons 3. bias units 4. weights. 
+
+We can observe that activation neurons of two neighbor layers are connected by weights, and biases of the current layer are broadcasted to the activation neurons on the next layer. 
 
 Definitions:
 - $A^{(0)}$ is the activation matrix with the number of neurons equal to the number of input features for each sample on the input layer
@@ -15,6 +17,7 @@ Definitions:
 - $A^{(l+1)}$ is the activation matrix with $Q$ neurons for each sample on the $(l+1)$ th hidden layer
 - $W^{(l)}$ is the weight matrix connecting the activation neurons on the $l$ th hidden layer to the activation neurons $(l+1)$ th hidden layer
 - $B^{(l)}$ is the bias matrix on the $l$ th layer, and is initialized to 1
+- b_q^{(l)} is the bias on the l th layer and broadcasted to the q th neuron on the (l+1) th layer
 - $\phi(Z^{(l)})$ is the activation function that calculates $A^{(l+1)}$
 - $Z^{(l)}$ is the net input function that combines $A^{(l)}$ and $W^{(l)}$
 - $m$ is the batch size
